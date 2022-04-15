@@ -1,12 +1,24 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Home
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+
+
+<ion-content>
+  <ion-thumbnail>
+    <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+  </ion-thumbnail>
+  <ion-button expand="block" fill="outline" color="success" (click)="addRestbtn()"><ion-icon name="add-circle"></ion-icon>Add Restaurant</ion-button>
+
+  <ion-button expand="block" fill="outline" color="medium" (click)="updateRestbtn()"><ion-icon name="create"></ion-icon>Update Restaurant</ion-button>
+
+  <ion-button expand="block" fill="outline" color="danger" (click)="deleteRestbtn()"><ion-icon name="close-circle"></ion-icon>Delete Restaurant</ion-button>
+</ion-content>
+<!-- <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Tab 1</ion-title>
@@ -14,4 +26,4 @@
   </ion-header>
 
   <app-explore-container name="Tab 1 page"></app-explore-container>
-</ion-content>
+</ion-content> -->

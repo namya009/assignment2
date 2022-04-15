@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add restaurant</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list lines="full">
+    <form [formGroup]="mainForm" (ngSubmit)="storeData()">
+      <ion-item>
+        <ion-label position="floating">Restaurant Name : </ion-label>
+        <ion-input formControlName="rest_name" type="text" required> </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Restaurant Address : </ion-label>
+        <ion-input formControlName="rest_address" type="text" required> </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Restaurant Postal Code : </ion-label>
+        <ion-input formControlName="rest_postal" type="text" required> </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Restaurant City : </ion-label>
+        <ion-input formControlName="rest_city" type="text" required> </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Restaurant Phone : </ion-label>
+        <ion-input formControlName="rest_phone" type="text" required> </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Restaurant Description : </ion-label>
+        <ion-input formControlName="rest_description" type="text" required> </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Restaurant Rating : </ion-label>
+        <ion-input formControlName="rest_rating" type="number" required> </ion-input>
+      </ion-item>
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="primary" shape="full" expand="block">
+            Add Restaurant
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-list>
+  <ion-button (click)="backbtn()" expand="block" color="medium"><ion-icon name="caret-back"></ion-icon>   Back</ion-button>
+</ion-content>
+
+<ion-item lines="inset" *ngFor="let data of Data">
+  <ion-label>{{data.rest_name}}</ion-label>
+</ion-item>
