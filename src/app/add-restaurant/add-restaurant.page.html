@@ -47,6 +47,9 @@
   <ion-button (click)="backbtn()" expand="block" color="medium"><ion-icon name="caret-back"></ion-icon>   Back</ion-button>
 </ion-content>
 
-<ion-item lines="inset" *ngFor="let data of Data">
-  <ion-label>{{data.rest_name}}</ion-label>
-</ion-item>
+
+<ion-list>
+    <ion-item lines="inset" *ngFor="let data of Data">
+      <ion-label>{{data.rest_name}}</ion-label>
+    </ion-item>
+</ion-list>

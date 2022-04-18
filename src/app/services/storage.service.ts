@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { SQLite , SQLiteObject} from '@ionic-native/sqlite/ngx';
 import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
 import { IonItemSliding, Platform } from '@ionic/angular';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AddRestaurantPage } from '../add-restaurant/add-restaurant.page';
 import { Restaurant } from './restaurant';
 
@@ -25,54 +25,50 @@ export class StorageService {
   ) {
 
     this.platform.ready().then(()=>{
-      // this.sqlite.create({
-      //   name:'restaurant.db',
-      //   location: 'default'
-      // }).then(
-      //   (db:SQLiteObject)=>{
-      //     this.storage = db;
-      //     this.getFakeDate();
-      //   }
-      // )
-      this.init()
+      this.sqlite.create({
+        name:'restaurant.db',
+        location: 'default'
+       
+      })
+      
+      .then((db:SQLiteObject)=>{
+          this.storage = db;
+          this.getFakeDate();
+        }
+      )// this.init()
     })
-    // this.init()
+   
    }
 
 
-   init(){
-     return this.sqlite.create(
-       {
-        name:'restaurant.db',
-        location: 'default'
-       }
-     ).then((db : SQLiteObject) =>{
-       this.storage = db;
-       this.storage.executeSql("SELECT name FROM sqlite_master WHERE type='table' AND name='rtable'; ", [])
-       .then(res=>{
-        if(res.rows.length > 0){
-        this.getRestaurants();
-        this.isDbReady.next(true);
-        }else{
-        this.getFakeDate();
-        }
-        })
-        .catch(err=>{
-        this.getFakeDate();
-        })
-        });
-        }
+  //  init(){
+  //    return this.sqlite.create(
+  //      {
+  //       name:'restaurant.db',
+  //       location: 'default'
+  //      }
+  //    ).then((db : SQLiteObject) =>{
+  //      this.storage = db;
+  //      this.storage.executeSql("SELECT name FROM sqlite_master WHERE type='table' AND name='rtable'; ", [])
+  //      .then(res=>{
+  //       if(res.rows.length > 0){
+  //       this.getRestaurants();
+  //       this.isDbReady.next(true);
+  //       }else{
+  //       this.getFakeDate();
+  //       }
+  //       })
+  //       .catch(err=>{
+  //       this.getFakeDate();
+  //       })
+  //       });
+  //       }
 
-  dbState(){
-    return this.isDbReady.asObservable();
-  }
 
-  fetchRestaurant(){
-    return this.restaurantList.asObservable();
-  }
 
   getFakeDate(){
-    this.httpClient.get('assets/data.sql', {responseType: 'text'}).subscribe(data=>{
+    this.httpClient.get('assets/data.sql', {responseType: 'text'})
+    .subscribe(data=>{
       this.sqlPorter.importSqlToDb(this.storage, data)
       .then(_=>{
         this.getRestaurants();
@@ -83,11 +79,19 @@ export class StorageService {
     });
   }
 
+  dbState(){
+    return this.isDbReady.asObservable();
+  }
+
+  fetchRestaurant() : Observable<Restaurant[]>{
+    return this.restaurantList.asObservable();
+  }
+
   getRestaurants(){
     return this.storage.executeSql('SELECT * FROM rtable' , []).then(res=>{
       let items: Restaurant[] = [];
       if(res.rows.length > 0){
-        for(var i = 0 ; i < res.rows.length; i++){
+        for(let i = 0 ; i < res.rows.length; i++){
           items.push(
             {
               id:res.rows.item(i).id,
@@ -100,11 +104,10 @@ export class StorageService {
               rest_rating:res.rows.item(i).rest_rating
             }
           );
-        }
-        this.restaurantList.next(items);
+        }  
       }
-    })
-
+      this.restaurantList.next(items);
+    });
   }
     //add
     addRestaurant(rest_name, rest_address, rest_postal, rest_city, rest_description, rest_phone, rest_rating){
@@ -112,9 +115,7 @@ export class StorageService {
         return this.storage.executeSql('INSERT INTO rtable(rest_name, rest_address, rest_postal, rest_city, rest_description, rest_phone, rest_rating) VALUES(?,?,?,?,?,?,?)',data)
         .then(res=>{
           this.getRestaurants();
-        })
-    
-   
+        });
     }
  //get
 
@@ -131,9 +132,8 @@ export class StorageService {
           rest_phone:res.rows(0).rest_phone,
           rest_rating:res.rows(0).rest_rating
 
-        }
-      })
-   
+        };
+      });
   }
  //update
     updateRestaurant(id, restaurant:Restaurant){

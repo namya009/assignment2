@@ -30,6 +30,8 @@ export class AddRestaurantPage implements OnInit {
       if(res){
         this.db.fetchRestaurant().subscribe(item=>{
           this.Data = item
+          console.log(item)
+          console.log(this.Data)
         })
       }
     });
