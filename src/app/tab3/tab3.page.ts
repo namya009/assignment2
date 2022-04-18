@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ToastController } from '@ionic/angular';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-tab3',
@@ -6,7 +8,16 @@ import { Component } from '@angular/core';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
-
-  constructor() {}
-
+  data: any[] = [];
+  constructor(private db: StorageService,private toast: ToastController) {
+  }
+  ngOnInit() {
+    this.db.dbState().subscribe((res) => {
+      if (res) {
+        this.db.fetchRestaurant().subscribe((item) => {
+          this.data = item;
+        });
+      }
+    });
+  }
 }
