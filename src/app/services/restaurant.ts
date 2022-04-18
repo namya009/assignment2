@@ -1,5 +1,5 @@
 export class Restaurant {
-    id : number;
+    id: number;
     rest_name : string;
     rest_address: string;
     rest_postal: string;

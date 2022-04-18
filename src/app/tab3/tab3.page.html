@@ -6,10 +6,15 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-content  [fullscreen]="true">
+<ion-list>
 <ion-item lines="inset" *ngFor="let i of data">
   <ion-label>{{i.rest_name}}</ion-label>
   <div class="item-note" item-end>
+    <ion-icon name="document" style="zoom:2.0" [routerLink]="['/detail-restaurant/', i.id]"></ion-icon>
     <ion-icon name="create" style="zoom:2.0" [routerLink]="['/update-restaurant/', i.id]"></ion-icon>
     <ion-icon name="trash" style="zoom:2.0" (click)="deleteRestaurant(i.id)"></ion-icon>
   </div>
 </ion-item>
+</ion-list>
+</ion-content>

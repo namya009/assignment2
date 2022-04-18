@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-detail-restaurant',
@@ -6,10 +9,41 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./detail-restaurant.page.scss'],
 })
 export class DetailRestaurantPage implements OnInit {
+  id: any;
+  name: string;
+  add: string;
+  postal: string;
+  city: string;
+  phone: string;
+  desc: string;
+  rate: number;
+  constructor(
+    private db: StorageService,
+    private actRoute: ActivatedRoute,
+    private toast: ToastController
+  ) {
 
-  constructor() { }
+    this.id = this.actRoute.snapshot.paramMap.get('id');
+    this.db.getRestaurantById(this.id).then(res => {
+      this.name=res.rest_name;
+      this.add=res.rest_address;
+      this.postal=res.rest_postal;
+      this.city=res.rest_city;
+      this.phone=res.rest_phone;
+      this.desc=res.rest_description;
+      this.rate=res.rest_rating;
+    }, err=>{
+      this.presentToast(err);
+    });
+   }
 
   ngOnInit() {
   }
-
+  async presentToast(str) {
+    let toast = await this.toast.create({
+      message: str,
+      duration: 3000,
+    });
+    toast.present();
+   }
 }

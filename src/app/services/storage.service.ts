@@ -83,13 +83,13 @@ export class StorageService {
     return this.isDbReady.asObservable();
   }
 
-  fetchRestaurant() : Observable<Restaurant[]>{
+  fetchRestaurant(): Observable<Restaurant[]>{
     return this.restaurantList.asObservable();
   }
 
   getRestaurants(){
     return this.storage.executeSql('SELECT * FROM rtable' , []).then(res=>{
-      let items: Restaurant[] = [];
+      const items: Restaurant[] = [];
       if(res.rows.length > 0){
         for(let i = 0 ; i < res.rows.length; i++){
           items.push(
@@ -104,7 +104,7 @@ export class StorageService {
               rest_rating:res.rows.item(i).rest_rating
             }
           );
-        }  
+        }
       }
       this.restaurantList.next(items);
     });
@@ -119,21 +119,19 @@ export class StorageService {
     }
  //get
 
-  getRestaurantById(id):Promise<Restaurant>{
+  getRestaurantById(id): Promise<Restaurant>{
       return this.storage.executeSql('SELECT * FROM rtable WHERE id = ?', [id])
-      .then(res=>{
-        return{
-          id: res.rows(0).id,
-          rest_name:res.rows(0).rest_name,
-          rest_address:res.rows(0).rest_address,
-          rest_postal:res.rows(0).rest_postal,
-          rest_city:res.rows(0).rest_city,
-          rest_description:res.rows(0).rest_description,
-          rest_phone:res.rows(0).rest_phone,
-          rest_rating:res.rows(0).rest_rating
+      .then(res=>({
+          id:res.rows.item(0).id,
+          rest_name:res.rows.item(0).rest_name,
+          rest_address:res.rows.item(0).rest_address,
+          rest_postal:res.rows.item(0).rest_postal,
+          rest_city:res.rows.item(0).rest_city,
+          rest_description:res.rows.item(0).rest_description,
+          rest_phone:res.rows.item(0).rest_phone,
+          rest_rating:res.rows.item(0).rest_rating
 
-        };
-      });
+        }));
   }
  //update
     updateRestaurant(id, restaurant:Restaurant){

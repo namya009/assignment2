@@ -57,9 +57,7 @@ export class AddRestaurantPage implements OnInit {
       )
       .then((res) => {
         this.mainForm.reset();
-         this.navCtr.navigateForward('tab3')
+        this.navCtr.navigateForward('tab3');
       });
   }
-
-  
 }
