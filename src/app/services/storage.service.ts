@@ -101,8 +101,7 @@ export class StorageService {
               rest_city:res.rows.item(i).rest_city,
               rest_description:res.rows.item(i).rest_description,
               rest_phone:res.rows.item(i).rest_phone,
-              rest_rating:res.rows.item(i).rest_rating,
-              rest_tag:res.rows.item(i).rest_tag,
+              rest_rating:res.rows.item(i).rest_rating
             }
           );
         }  
@@ -111,9 +110,9 @@ export class StorageService {
     });
   }
     //add
-    addRestaurant(rest_name, rest_address, rest_postal, rest_city, rest_description, rest_phone, rest_rating , rest_tag){
-        let data = [rest_name, rest_address, rest_postal, rest_city, rest_description, rest_phone, rest_rating , rest_tag];
-        return this.storage.executeSql('INSERT INTO rtable(rest_name, rest_address, rest_postal, rest_city, rest_description, rest_phone, rest_rating , rest_tag) VALUES(?,?,?,?,?,?,?,?)',data)
+    addRestaurant(rest_name, rest_address, rest_postal, rest_city, rest_description, rest_phone, rest_rating){
+        let data = [rest_name, rest_address, rest_postal, rest_city, rest_description, rest_phone, rest_rating];
+        return this.storage.executeSql('INSERT INTO rtable(rest_name, rest_address, rest_postal, rest_city, rest_description, rest_phone, rest_rating) VALUES(?,?,?,?,?,?,?)',data)
         .then(res=>{
           this.getRestaurants();
         });
@@ -131,16 +130,15 @@ export class StorageService {
           rest_city:res.rows(0).rest_city,
           rest_description:res.rows(0).rest_description,
           rest_phone:res.rows(0).rest_phone,
-          rest_rating:res.rows(0).rest_rating,
-          rest_tag:res.rows(0).rest_tag,
+          rest_rating:res.rows(0).rest_rating
 
         };
       });
   }
  //update
     updateRestaurant(id, restaurant:Restaurant){
-        let data = [restaurant.rest_name, restaurant.rest_address, restaurant.rest_postal, restaurant.rest_city, restaurant.rest_description, restaurant.rest_phone, restaurant.rest_rating , restaurant.rest_tag]
-        return this.storage.executeSql(`UPDATE rtable SET rest_name = ? , rest_address = ? , rest_postal = ? , rest_city = ? , rest_description = ? , rest_phone = ? , rest_rating = ? , rest_tag = ? WHERE id = ${id}` , data)
+        let data = [restaurant.rest_name, restaurant.rest_address, restaurant.rest_postal, restaurant.rest_city, restaurant.rest_description, restaurant.rest_phone, restaurant.rest_rating]
+        return this.storage.executeSql(`UPDATE rtable SET rest_name = ? , rest_address = ? , rest_postal = ? , rest_city = ? , rest_description = ? , rest_phone = ? , rest_rating = ? WHERE id = ${id}` , data)
         .then(
           data =>{
             this.getRestaurants();

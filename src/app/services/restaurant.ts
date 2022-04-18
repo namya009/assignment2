@@ -7,5 +7,4 @@ export class Restaurant {
     rest_phone: string;
     rest_description: string;
     rest_rating:number;
-    rest_tag: string;
 }

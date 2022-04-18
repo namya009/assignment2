@@ -27,7 +27,6 @@ export class UpdateRestaurantPage implements OnInit {
         rest_description: res['rest_description'],
         rest_phone: res['rest_phone'],
         rest_rating: res['rest_rating'],
-        rest_tag: res['rest_tag'],
       })
     })
    }
@@ -41,7 +40,6 @@ export class UpdateRestaurantPage implements OnInit {
       rest_description: [''],
       rest_phone: [''],
       rest_rating: [''],
-      rest_tag:['']
     })
   }
   saveForm(){
