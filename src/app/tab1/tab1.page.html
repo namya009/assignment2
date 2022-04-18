@@ -14,9 +14,9 @@
   </ion-thumbnail>
   <ion-button expand="block" fill="outline" color="success" (click)="addRestbtn()"><ion-icon name="add-circle"></ion-icon>Add Restaurant</ion-button>
 
-  <ion-button expand="block" fill="outline" color="medium" (click)="updateRestbtn()"><ion-icon name="create"></ion-icon>Update Restaurant</ion-button>
+  <ion-button expand="block" fill="outline" color="medium" [routerLink]="['/tabs/tab3']"><ion-icon name="create"></ion-icon>Update Restaurant</ion-button>
 
-  <ion-button expand="block" fill="outline" color="danger" (click)="deleteRestbtn()"><ion-icon name="close-circle"></ion-icon>Delete Restaurant</ion-button>
+  <ion-button expand="block" fill="outline" color="danger" [routerLink]="['/tabs/tab3']"><ion-icon name="close-circle"></ion-icon>Delete Restaurant</ion-button>
 </ion-content>
 <!-- <ion-content [fullscreen]="true">
   <ion-header collapse="condense">

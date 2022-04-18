@@ -41,6 +41,7 @@ export class AddRestaurantPage implements OnInit {
       rest_description: [''],
       rest_phone: [''],
       rest_rating: [''],
+      rest_tag:[''],
     });
   }
 
@@ -53,11 +54,12 @@ export class AddRestaurantPage implements OnInit {
         this.mainForm.value.rest_city,
         this.mainForm.value.rest_description,
         this.mainForm.value.rest_phone,
-        this.mainForm.value.rest_rating
+        this.mainForm.value.rest_rating,
+        this.mainForm.value.rest_tag
       )
       .then((res) => {
         this.mainForm.reset();
-        window.location.href= 'tab3'
+        this.navCtr.navigateForward('tab3')
       });
   }
 

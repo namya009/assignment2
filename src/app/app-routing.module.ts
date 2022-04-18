@@ -10,10 +10,7 @@ const routes: Routes = [
     path: 'add-restaurant',
     loadChildren: () => import('./add-restaurant/add-restaurant.module').then( m => m.AddRestaurantPageModule)
   },
-  {
-    path: 'update',
-    loadChildren: () => import('./tab3/tab3.module').then(m => m.Tab3PageModule)
-  },
+
   {
     path: 'update-restaurant/:id',
     loadChildren: () => import('./update-restaurant/update-restaurant.module').then( m => m.UpdateRestaurantPageModule)
