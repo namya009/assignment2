@@ -14,10 +14,10 @@ export class Tab1Page {
       this.navCtr.navigateForward('add-restaurant')
   }
   updateRestbtn(){
-    this.navCtr.navigateForward('update')
+    this.navCtr.navigateForward('tab3')
   }
   deleteRestbtn(){
-    this.navCtr.navigateForward('update')
+    this.navCtr.navigateForward('tab3')
   }
 
 }

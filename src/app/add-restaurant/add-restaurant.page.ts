@@ -57,6 +57,7 @@ export class AddRestaurantPage implements OnInit {
       )
       .then((res) => {
         this.mainForm.reset();
+        window.location.href= 'tab3'
       });
   }
 
