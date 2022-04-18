@@ -15,11 +15,11 @@ const routes: Routes = [
     loadChildren: () => import('./tab3/tab3.module').then(m => m.Tab3PageModule)
   },
   {
-    path: 'update-restaurant',
+    path: 'update-restaurant/id',
     loadChildren: () => import('./update-restaurant/update-restaurant.module').then( m => m.UpdateRestaurantPageModule)
   },
   {
-    path: 'detail-restaurant',
+    path: 'detail-restaurant/id',
     loadChildren: () => import('./detail-restaurant/detail-restaurant.module').then( m => m.DetailRestaurantPageModule)
   },
   {

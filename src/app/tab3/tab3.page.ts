@@ -20,4 +20,16 @@ export class Tab3Page {
       }
     });
   }
+
+  deleteRestaurant(id) {
+    this.db.deleteRestaurant(id).then(async (res) => {
+      let toast = await this.toast.create({
+        message: 'Restaurant Deleted',
+        duration: 3000,
+      });
+      toast.present();
+    });
+  }
+
+
 }
