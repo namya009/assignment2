@@ -10,21 +10,21 @@ import { StorageService } from '../services/storage.service';
 export class Tab2Page {
   str: string;
   data: any[] = [];
+  filteredData: any[] = [];
   constructor(private db: StorageService,private toast: ToastController) {
   }
-  searchItem(){
-    this.db.getRestaurantsByNameOrTag(this.str).then(res => {
-      if(res instanceof Object){
-        this.presentToast('d');
-        this.presentToast(res.rest_name);
-
-      }else{
-        this.presentToast(res[0].toString());
-        this.presentToast("res[0].rest_name");
-
+  ngOnInit() {
+    this.db.dbState().subscribe((res) => {
+      if (res) {
+        this.db.fetchRestaurant().subscribe((item) => {
+          this.data = item;
+        });
       }
-    }, err=>{
-      this.presentToast('e');
+    });
+  }
+  searchItem(){
+    this.filteredData = this.data.filter((item)=>{
+      return item.rest_name.toLowerCase().indexOf(this.str.toLowerCase()) > -1;
     });
   }
   async presentToast(str) {

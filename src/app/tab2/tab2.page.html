@@ -10,6 +10,9 @@
   <ion-item>
     <ion-input placeholder="Search by name or tag" (keyup.enter)="searchItem()" [(ngModel)]="str" clearInput></ion-input>
   </ion-item>
-
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-list>
+    <ion-item lines="inset" *ngFor="let i of filteredData">
+      <ion-label [routerLink]="['/detail-restaurant/', i.id]">{{i.rest_name}}</ion-label>
+    </ion-item>
+    </ion-list>
 </ion-content>

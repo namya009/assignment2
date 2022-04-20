@@ -121,7 +121,7 @@ export class StorageService {
       rest_description,
       rest_phone,
       rest_rating,
-    ];
+  ];
     return this.storage
       .executeSql(
         'INSERT INTO rtable(rest_name, rest_address, rest_postal, rest_city, rest_description, rest_phone, rest_rating) VALUES(?,?,?,?,?,?,?)',
@@ -146,27 +146,6 @@ export class StorageService {
         rest_phone: res.rows.item(0).rest_phone,
         rest_rating: res.rows.item(0).rest_rating,
       }));
-  }
-  //search by name or tag
-  getRestaurantsByNameOrTag(str): Promise<void | Restaurant> {
-    return this.storage.executeSql('SELECT * FROM rtable WHERE rest_name = ?', [str]).then((res) => {
-      const items: Restaurant[] = [];
-      if (res.rows.length > 0) {
-        for (let i = 0; i < res.rows.length; i++) {
-          items.push({
-            id: res.rows.item(i).id,
-            rest_name: res.rows.item(i).rest_name,
-            rest_address: res.rows.item(i).rest_address,
-            rest_postal: res.rows.item(i).rest_postal,
-            rest_city: res.rows.item(i).rest_city,
-            rest_description: res.rows.item(i).rest_description,
-            rest_phone: res.rows.item(i).rest_phone,
-            rest_rating: res.rows.item(i).rest_rating,
-          });
-        }
-      }
-      this.restaurantList.next(items);
-    });
   }
   //update
   updateRestaurant(id, restaurant: Restaurant) {
