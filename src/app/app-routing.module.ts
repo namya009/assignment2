@@ -26,6 +26,10 @@ const routes: Routes = [
   {
     path: 'about',
     loadChildren: () => import('./about/about.module').then( m => m.AboutPageModule)
+  },
+  {
+    path: 'share',
+    loadChildren: () => import('./share/share.module').then( m => m.SharePageModule)
   }
 ];
 @NgModule({
