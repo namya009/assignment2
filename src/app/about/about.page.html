@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>About</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-item *ngFor="let name of names">
+      <div >
+        <p>{{name}}</p>
+      </div>
+    </ion-item>
+    <ion-button (click)="backbtn()" expand="block" color="medium"><ion-icon name="caret-back"></ion-icon>   Back</ion-button>
+</ion-content>
