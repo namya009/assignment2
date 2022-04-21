@@ -11,7 +11,7 @@ export class Tab1Page {
   constructor(public navCtr : NavController) {}
 
   addRestbtn(){
-      this.navCtr.navigateForward('add-restaurant')
+      this.navCtr.navigateForward('add-restaurant');
   }
 
 }

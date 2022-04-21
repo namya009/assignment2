@@ -24,6 +24,13 @@
     </ion-card-content>
   </ion-card>
   
-  <ion-button expand="block" color="primary" [routerLink]="['/share']" ><ion-icon name="share-social"></ion-icon>Share</ion-button>
-
+  <ion-button expand="block" color="primary" [routerLink]="['/share']" ><ion-icon name="share-social"></ion-icon>&nbsp;Share</ion-button>
+  <ion-button expand="block" color="medium" [routerLink]="['/update-restaurant/', id]">
+    <ion-icon name="create"></ion-icon>
+    &nbsp;Update
+  </ion-button>
+  <ion-button expand="block" color="danger" (click)="deleteRestaurant(id)">
+    <ion-icon name="trash"></ion-icon>
+    &nbsp;Delete
+  </ion-button>
 </ion-content>

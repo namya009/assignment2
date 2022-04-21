@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 import { StorageService } from '../services/storage.service';
 
 @Component({
@@ -20,7 +20,8 @@ export class DetailRestaurantPage implements OnInit {
   constructor(
     private db: StorageService,
     private actRoute: ActivatedRoute,
-    private toast: ToastController
+    private toast: ToastController,
+    public navCtr: NavController
   ) {
 
     this.id = this.actRoute.snapshot.paramMap.get('id');
@@ -46,4 +47,15 @@ export class DetailRestaurantPage implements OnInit {
     });
     toast.present();
    }
+   deleteRestaurant(id) {
+    this.db.deleteRestaurant(id).then(async (res) => {
+      let toast = await this.toast.create({
+        message: 'Restaurant Deleted',
+        duration: 3000,
+      });
+      toast.present();
+      this.navCtr.navigateRoot('tabs/tab3');
+    });
+
+  }
 }
