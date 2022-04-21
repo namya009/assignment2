@@ -52,6 +52,7 @@ export class UpdateRestaurantPage implements OnInit {
     .then( (res) => {
       console.log(res);
       this.presentToast('Restaurant updated');
+      this.navCtr.navigateRoot('tabs/tab3');
     });
   }
  async presentToast(str) {

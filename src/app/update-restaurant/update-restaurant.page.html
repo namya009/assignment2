@@ -34,9 +34,15 @@
         <ion-input formControlName="rest_description" type="text" required> </ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Restaurant Rating : </ion-label>
-        <ion-input formControlName="rest_rating" type="number" required> </ion-input>
-      </ion-item>   
+        <ion-label>Restaurant Rate:</ion-label>
+        <ion-select formControlName="rest_rating" interface="popover" required>
+          <ion-select-option value="1">1</ion-select-option>
+          <ion-select-option value="2">2</ion-select-option>
+          <ion-select-option value="3">3</ion-select-option>
+          <ion-select-option value="4">4</ion-select-option>
+          <ion-select-option value="5">5</ion-select-option>
+        </ion-select>
+      </ion-item> 
       <ion-row>
         <ion-col>
           <ion-button type="submit" color="primary" shape="full" expand="block">

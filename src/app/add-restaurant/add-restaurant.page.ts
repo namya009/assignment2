@@ -12,10 +12,7 @@ import { StorageService } from '../services/storage.service';
 export class AddRestaurantPage implements OnInit {
   mainForm: FormGroup;
   Data: any[] = [];
-
-  backbtn() {
-    this.navCtr.navigateBack('/');
-  }
+  rate: string;
 
   constructor(
     public navCtr: NavController,
@@ -43,8 +40,12 @@ export class AddRestaurantPage implements OnInit {
       rest_rating: [''],
     });
   }
-
+  backbtn() {
+    this.navCtr.navigateBack('/');
+  }
   storeData() {
+
+    console.log(this.mainForm.value.rest_rating);
     this.db
       .addRestaurant(
         this.mainForm.value.rest_name,
@@ -53,11 +54,11 @@ export class AddRestaurantPage implements OnInit {
         this.mainForm.value.rest_city,
         this.mainForm.value.rest_description,
         this.mainForm.value.rest_phone,
-        this.mainForm.value.rest_rating
+        parseInt(this.mainForm.value.rest_rating, 10)
       )
       .then((res) => {
         this.mainForm.reset();
-        this.navCtr.navigateForward('tab3');
+        this.navCtr.navigateRoot('tabs/tab3');
       });
   }
 }
